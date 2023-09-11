@@ -28,7 +28,7 @@ class AuthInterceptor extends Interceptor {
 
   @override
   Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
-    final response = await ref.read(authProvider.future);
+    final response = await ref.read(authNotifierProvider.future);
     final token = response.token;
 
     if (token != '') {

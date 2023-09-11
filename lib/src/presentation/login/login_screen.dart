@@ -9,7 +9,7 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final asyncAuth = ref.watch(authProvider);
+    final asyncAuth = ref.watch(authNotifierProvider);
 
     return Scaffold(
       body: Center(
@@ -31,7 +31,7 @@ class LoginScreen extends ConsumerWidget {
   }
 
   void _onSignInPressed(WidgetRef ref) {
-    final authNotifier = ref.read(authProvider.notifier);
+    final authNotifier = ref.read(authNotifierProvider.notifier);
     authNotifier.auth('test', 'test');
   }
 }

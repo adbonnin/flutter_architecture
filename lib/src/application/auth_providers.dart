@@ -1,16 +1,20 @@
 import 'package:flutter_architecture/src/data/auth_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final authProvider = AsyncNotifierProvider<AuthNotifier, AuthResponse>(AuthNotifier.new);
+part 'auth_providers.g.dart';
 
-class AuthNotifier extends AsyncNotifier<AuthResponse> {
+@Riverpod(keepAlive: true)
+class AuthNotifier extends _$AuthNotifier {
   AuthNotifier();
 
   @override
-  AuthResponse build() {
-    return AuthResponse(
-      auth: false,
-      token: '',
+  Future<AuthResponse> build() {
+    return Future.value(
+      AuthResponse(
+        auth: false,
+        token: '',
+      ),
     );
   }
 

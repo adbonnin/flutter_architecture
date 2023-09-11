@@ -31,7 +31,7 @@ class _TodoListScreenState extends ConsumerState<TodoListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final asyncTodos = ref.watch(todosProvider);
+    final asyncTodos = ref.watch(filterTodosProvider);
 
     return Center(
       child: asyncTodos.when(

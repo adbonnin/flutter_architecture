@@ -76,7 +76,7 @@ final routerProvider = Provider<GoRouter>((ref) {
 
 Future<String?> _redirect(Ref ref, GoRouterState state) async {
   final location = state.matchedLocation;
-  final isAuth = (await ref.read(authProvider.future)).auth;
+  final isAuth = (await ref.read(authNotifierProvider.future)).auth;
 
   if (!isAuth) {
     return '/login';
@@ -91,6 +91,6 @@ Future<String?> _redirect(Ref ref, GoRouterState state) async {
 
 class _RouterChangeNotifier extends ChangeNotifier {
   _RouterChangeNotifier(Ref ref) {
-    ref.listen(authProvider, (_, __) => notifyListeners());
+    ref.listen(authNotifierProvider, (_, __) => notifyListeners());
   }
 }

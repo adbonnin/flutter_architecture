@@ -5,6 +5,12 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'todo_providers.g.dart';
 
 @Riverpod()
+Future<List<Todo>> filterTodos(FilterTodosRef ref) async {
+  final todos = await ref.watch(todosProvider.future);
+  return todos.where((element) => element.id % 2 == 0).toList();
+}
+
+@Riverpod()
 Future<List<Todo>> todos(TodosRef ref) {
   return ref.read(todoClientProvider).findAllTodos();
 }
