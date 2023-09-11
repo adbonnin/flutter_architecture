@@ -28,7 +28,8 @@ class AuthInterceptor extends Interceptor {
 
   @override
   Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
-    final token = ref.read(authProvider).token;
+    final response = await ref.read(authProvider.future);
+    final token = response.token;
 
     if (token != '') {
       options.headers = {
@@ -63,6 +64,23 @@ class TodoClient {
 
     final todos = Todo.fromJsonList(response);
     return Future.delayed(Duration(seconds: 3), () => todos);
+  }
+
+  Future<Todo> findById(int id) async {
+
+    print('find by id');
+
+    final response = jsonDecode('''
+
+        {
+          "id": $id,
+          "name": "Test $id"
+        }
+      
+    ''');
+
+    final todo = Todo.fromJson(response);
+    return Future.delayed(Duration(seconds: 3), () => todo);
   }
 }
 

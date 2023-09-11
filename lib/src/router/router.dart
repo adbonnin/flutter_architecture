@@ -74,9 +74,9 @@ final routerProvider = Provider<GoRouter>((ref) {
   );
 });
 
-String? _redirect(Ref ref, GoRouterState state) {
+Future<String?> _redirect(Ref ref, GoRouterState state) async {
   final location = state.matchedLocation;
-  final isAuth = ref.read(authProvider).auth;
+  final isAuth = (await ref.read(authProvider.future)).auth;
 
   if (!isAuth) {
     return '/login';
